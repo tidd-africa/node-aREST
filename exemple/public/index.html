@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contrôle d'Arduino</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Contrôle d'Arduino</h1>
+
+    <h2>Liste des devices</h2>
+    <button onclick="getDevices()">Obtenir les devices</button>
+    <div id="devices"></div>
+
+    <h2>Commande</h2>
+    <label for="deviceCommand">Nom du device :</label>
+    <input type="text" id="deviceCommand" />
+    <br />
+    <label for="command">Commande :</label>
+    <input type="text" id="command" />
+    <br /><br />
+    <button onclick="sendCommand()">Envoyer la commande</button>
+
+    <h2>Écriture digitale</h2>
+    <label for="deviceDigital">Nom du device :</label>
+    <input type="text" id="deviceDigital" />
+    <br />
+    <label for="pinDigital">Numéro de la broche :</label>
+    <input type="number" id="pinDigital" min="0" max="13" />
+    <br />
+    <label for="valueDigital">Valeur (0 ou 1) :</label>
+    <input type="number" id="valueDigital" min="0" max="1" />
+    <br /><br />
+    <button onclick="writeDigital()">Écrire la valeur digitale</button>
+
+    <h2>Lecture analogique</h2>
+    <label for="deviceAnalog">Nom du device :</label>
+    <input type="text" id="deviceAnalog" />
+    <br />
+    <label for="pinAnalog">Numéro de la broche :</label>
+    <input type="number" id="pinAnalog" min="0" max="5" />
+    <br /><br />
+    <button onclick="readAnalog()">Lire la valeur analogique</button>
+
+    <h2>Écriture analogique</h2>
+    <label for="deviceAnalogWrite">Nom du device :</label>
+    <input type="text" id="deviceAnalogWrite" />
+    <br />
+    <label for="pinAnalogWrite">Numéro de la broche :</label>
+    <input type="number" id="pinAnalogWrite" min="0" max="5" />
+    <br />
+    <label for="valueAnalogWrite">Valeur (0-255) :</label>
+    <input type="number" id="valueAnalogWrite" min="0" max="255" />
+    <br /><br />
+    <button onclick="writeAnalog()">Écrire la valeur analogique</button>
+
+    <h2>Lecture digitale</h2>
+    <label for="deviceDigitalRead">Nom du device :</label>
+    <input type="text" id="deviceDigitalRead" />
+    <br />
+    <label for="pinDigitalRead">Numéro de la broche :</label>
+    <input type="number" id="pinDigitalRead" min="0" max="13" />
+    <br /><br />
+    <button onclick="readDigital()">Lire la valeur digitale</button>
+
+    <h2>Mode</h2>
+    <label for="deviceMode">Nom du device :</label>
+    <input type="text" id="deviceMode" />
+    <br />
+    <label for="pinMode">Numéro de la broche :</label>
+    <input type="number" id="pinMode" min="0" max="13" />
+    <br />
+    <label for="valueMode">Mode (INPUT, OUTPUT, INPUT_PULLUP) :</label>
+    <input type="text" id="valueMode" />
+    <br /><br />
+    <button onclick="setMode()">Définir le mode</button>
+
+    <h2>Capture d'image (RPi)</h2>
+    <label for="deviceCamera">Nom du device :</label>
+    <input type="text" id="deviceCamera" />
+    <br /><br />
+    <button onclick="takeSnapshot()">Prendre une photo</button>
+
+    <script>
+      function getDevices() {
+        var url = "http://localhost:3000/devices";
+
+        $.get(url, function (data) {
+          $("#devices").text(data);
+        });
+      }
+
+      function sendCommand() {
+        var device = $("#deviceCommand").val();
+        var command = $("#command").val();
+        var url = "http://localhost:3000/" + device + "/" + command;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function writeDigital() {
+        var device = $("#deviceDigital").val();
+        var pin = $("#pinDigital").val();
+        var value = $("#valueDigital").val();
+        var url =
+          "http://localhost:3000/" + device + "/digital/" + pin + "/" + value;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function readAnalog() {
+        var device = $("#deviceAnalog").val();
+        var pin = $("#pinAnalog").val();
+        var url = "http://localhost:3000/" + device + "/analog/" + pin;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function writeAnalog() {
+        var device = $("#deviceAnalogWrite").val();
+        var pin = $("#pinAnalogWrite").val();
+        var value = $("#valueAnalogWrite").val();
+        var url =
+          "http://localhost:3000/" + device + "/analog/" + pin + "/" + value;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function readDigital() {
+        var device = $("#deviceDigitalRead").val();
+        var pin = $("#pinDigitalRead").val();
+        var url = "http://localhost:3000/" + device + "/digital/" + pin;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function setMode() {
+        var device = $("#deviceMode").val();
+        var pin = $("#pinMode").val();
+        var value = $("#valueMode").val();
+        var url =
+          "http://localhost:3000/" + device + "/mode/" + pin + "/" + value;
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+
+      function takeSnapshot() {
+        var device = $("#deviceCamera").val();
+        var url = "http://localhost:3000/" + device + "/camera/snapshot";
+
+        $.get(url, function (data) {
+          console.log(data);
+        });
+      }
+    </script>
+  </body>
+</html>
+`
