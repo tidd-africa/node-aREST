@@ -2,8 +2,8 @@
 var request = require('request');
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
+const { ReadlineParser } = require("@serialport/parser-readline");
 var XBee = require('xbee-arest').XBee;
-var util = require('util');
 
 var aREST = {
   devices: [],
@@ -95,6 +95,7 @@ function Device () {
   this.speed = 0;
   this.name = "";
   this.id = "";
+  this.path = "";
   this.serial_port = {};
   this.xbee_node = {};
   this.message = {};
@@ -103,10 +104,17 @@ function Device () {
 
     var answer;
 
-    this.serial_port.once('data', function(data) {
-        answer = JSON.parse(data.toString('utf8'));
-        console.log('data received: ' + JSON.stringify(answer));
-      });
+    // Utilisation de ReadlineParser
+    const parser = this.serial_port.pipe(new ReadlineParser({ delimiter: "\r\n" }));
+
+    parser.on("data", function(line) {
+      // La valeur obtenu
+      answer = JSON.parse(line.toString('utf8'));
+      // Affichage de la valeur 
+      console.log('data received: ' + JSON.stringify(answer));
+    });
+
+  
 
     this.serial_port.write(Buffer(options.command + "\r"), function() {
       console.log('command sent via Serial');
@@ -140,9 +148,9 @@ function Device () {
 
   this.openSerialPort = function() {
 
-    this.serial_port = new SerialPort(this.address, {
+    this.serial_port = new SerialPort( {
       baudRate: this.speed,
-      parser: serialport.parsers.readline("\n")
+      path: this.path
     }, function(error){
       if (error) {console.log('Serial port cannot be opened');}
     });
@@ -462,11 +470,11 @@ module.exports = function (app) {
   
   return {
     devices: aREST.devices,
-    addDevice: function(type, address, speed) {
+    addDevice: function(type, path, speed) {
 
       var new_device = new Device();
       new_device.type = type;
-      new_device.address = address;
+      new_device.path = path;
 
       if (typeof speed != 'undefined'){
         new_device.speed = speed;
@@ -482,6 +490,7 @@ module.exports = function (app) {
 
       if (type == 'serial' || type == 'http') {
         setTimeout(function() {
+         
           new_device.getVariable('id', function(error, response, body) {
             if (error || typeof(body) == 'undefined') {console.log('Error adding the device');}
             else {

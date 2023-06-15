@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/marcoschwartz/node-aREST",
   "dependencies": {
-    "xbee-arest": "latest",
-    "util": "latest",
-    "request": "latest",
-    "jade": "latest",
-    "serialport": "latest"
+    "@serialport/parser-readline": "^11.0.0",
+    "nodemon": "^2.0.22",
+    "request": "^2.88.2",
+    "serialport": "^11.0.0",
+    "xbee-arest": "^0.1.3"
   }
 }
