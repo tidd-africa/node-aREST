@@ -37,6 +37,9 @@ javascriptCopy code
 
 ## Routes disponibles
 
+<br>
+<br>
+
 > ### Récupérer tous les devices
 
 **URL :** `http://localhost:3000/devices`
@@ -46,6 +49,9 @@ Cette route permet de récupérer la liste de tous les devices connectés.
 Exemple de requête :
 
 `GET /devices` 
+
+<br>
+<br>
 
 > ### Commande
 
@@ -59,6 +65,9 @@ Cette route permet d'envoyer une commande spécifique à un device.
 Exemple de requête :
 
 `GET /device1/command1` 
+
+<br>
+<br>
 
 > ### Écriture digitale
 
@@ -74,6 +83,9 @@ Exemple de requête :
 
 `GET /device1/digital/3/1` 
 
+<br>
+<br>
+
 > ### Lecture analogique
 
 **URL :** `http://localhost:3000/:device/analog/:pin`
@@ -86,6 +98,9 @@ Cette route permet de lire la valeur analogique d'une broche spécifique d'un de
 Exemple de requête :
 
 `GET /device1/analog/0` 
+
+<br>
+<br>
 
 > ### Écriture analogique
 
@@ -101,6 +116,9 @@ Exemple de requête :
 
 `GET /device1/analog/5/120` 
 
+<br>
+<br>
+
 > ### Lecture digitale
 
 **URL :** `http://localhost:3000/:device/digital/:pin`
@@ -113,6 +131,9 @@ Cette route permet de lire la valeur digitale d'une broche spécifique d'un devi
 Exemple de requête :
 
 `GET /device1/digital/2` 
+
+<br>
+<br>
 
 > ### Mode
 
@@ -127,6 +148,9 @@ Cette route permet de définir le mode d'une broche spécifique d'un device.
 Exemple de requête :
 
 `GET /device1/mode/4/OUTPUT` 
+
+<br>
+<br>
 
 > ### Capture d'image (pour RPi)
 
