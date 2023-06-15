@@ -9,7 +9,6 @@ Le package aRest permet de communiquer avec le module aREST d'Arduino pour envoy
 
 Pour installer le package, exécutez la commande suivante :
 
-bashCopy code
 
 `npm i https://github.com/tidd-africa/node-aREST.git` 
 
@@ -17,7 +16,7 @@ bashCopy code
 
 Pour utiliser le package aRest, suivez les étapes ci-dessous :
 
-javascriptCopy code
+
 
     const express = require("express");
     const app = express();
