@@ -255,7 +255,7 @@ Voici un exemple pour chaque partie de l'API :
       <button onclick="takeSnapshot()">Prendre une photo</button>
     
       <script> function getDevices() {
-          var url = "http://localhost:8000/devices";
+          var url = "http://localhost:3000/devices";
     
           $.get(url, function(data) {
             $("#devices").text(data);
@@ -265,7 +265,7 @@ Voici un exemple pour chaque partie de l'API :
         function sendCommand() {
           var device = $("#deviceCommand").val();
           var command = $("#command").val();
-          var url = "http://localhost:8000/" + device + "/" + command;
+          var url = "http://localhost:3000/" + device + "/" + command;
     
           $.get(url, function(data) {
             console.log(data);
@@ -276,7 +276,7 @@ Voici un exemple pour chaque partie de l'API :
           var device = $("#deviceDigital").val();
           var pin = $("#pinDigital").val();
           var value = $("#valueDigital").val();
-          var url = "http://localhost:8000/" + device + "/digital/" + pin + "/" + value;
+          var url = "http://localhost:3000/" + device + "/digital/" + pin + "/" + value;
     
           $.get(url, function(data) {
             console.log(data);
@@ -286,7 +286,7 @@ Voici un exemple pour chaque partie de l'API :
         function readAnalog() {
           var device = $("#deviceAnalog").val();
           var pin = $("#pinAnalog").val();
-          var url = "http://localhost:8000/" + device + "/analog/" + pin;
+          var url = "http://localhost:3000/" + device + "/analog/" + pin;
     
           $.get(url, function(data) {
             console.log(data);
@@ -297,7 +297,7 @@ Voici un exemple pour chaque partie de l'API :
           var device = $("#deviceAnalogWrite").val();
           var pin = $("#pinAnalogWrite").val();
           var value = $("#valueAnalogWrite").val();
-          var url = "http://localhost:8000/" + device + "/analog/" + pin + "/" + value;
+          var url = "http://localhost:3000/" + device + "/analog/" + pin + "/" + value;
     
           $.get(url, function(data) {
             console.log(data);
@@ -307,7 +307,7 @@ Voici un exemple pour chaque partie de l'API :
         function readDigital() {
           var device = $("#deviceDigitalRead").val();
           var pin = $("#pinDigitalRead").val();
-          var url = "http://localhost:8000/" + device + "/digital/" + pin;
+          var url = "http://localhost:3000/" + device + "/digital/" + pin;
     
           $.get(url, function(data) {
             console.log(data);
@@ -318,7 +318,7 @@ Voici un exemple pour chaque partie de l'API :
           var device = $("#deviceMode").val();
           var pin = $("#pinMode").val();
           var value = $("#valueMode").val();
-          var url = "http://localhost:8000/" + device + "/mode/" + pin + "/" + value;
+          var url = "http://localhost:3000/" + device + "/mode/" + pin + "/" + value;
     
           $.get(url, function(data) {
             console.log(data);
@@ -327,7 +327,7 @@ Voici un exemple pour chaque partie de l'API :
     
         function takeSnapshot() {
           var device = $("#deviceCamera").val();
-          var url = "http://localhost:8000/" + device + "/camera/snapshot";
+          var url = "http://localhost:3000/" + device + "/camera/snapshot";
     
           $.get(url, function(data) {
             console.log(data);
